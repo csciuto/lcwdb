@@ -23,11 +23,11 @@
     </logger>
 
     <logger name="org.springframework.boot">
-        <level value="debug" />
+        <level value="info" />
     </logger>
 
     <logger name="org.springframework.web">
-      <level value="debug" />
+      <level value="trace" />
     </logger>
 
     <logger name="sciuto.corey.lcwdb">
