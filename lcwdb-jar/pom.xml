@@ -47,6 +47,10 @@
                             </goals>
                         </execution>
                     </executions>
+                    <configuration>
+                        <mainClass>sciuto.corey.lcwdb.Example</mainClass>
+                        <layout>ZIP</layout>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

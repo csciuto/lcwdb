@@ -1,4 +1,4 @@
-package sciuto.corey.lcwwdb;
+package sciuto.corey.lcwdb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -11,7 +11,7 @@ public class Example {
 
     @RequestMapping("/")
     String home() {
-        return "Hello World!";
+        return "This is the Example class";
     }
 
     public static void main(String[] args) throws Exception {
