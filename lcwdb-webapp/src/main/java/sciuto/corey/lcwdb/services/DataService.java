@@ -1,5 +1,12 @@
 package sciuto.corey.lcwdb.services;
 
+import java.util.List;
+
+import sciuto.corey.lcwdb.model.Cemetery;
+import sciuto.corey.lcwdb.model.QueryByName;
+import sciuto.corey.lcwdb.model.QueryByNameResultRecord;
+import sciuto.corey.lcwdb.model.SoldierResultRecord;
+
 
 public interface DataService {
 
@@ -13,7 +20,7 @@ public interface DataService {
 	 * @param query
 	 * @return A list of matching soldiers
 	 */
-	//public QueryResultList<QueryByNameResultRecord> queryByName(QueryByName query);
+	public QueryResultList<QueryByNameResultRecord> queryByName(QueryByName query);
 	
 	/**
 	 * Queries for a soldier by id
@@ -21,12 +28,12 @@ public interface DataService {
 	 * @return The soldier
 	 * @throws IllegalArgumentException If the ID is invalid.
 	 */
-	//public SoldierResultRecord querySoldier(Integer id) throws IllegalArgumentException;
+	public SoldierResultRecord querySoldier(Integer id) throws IllegalArgumentException;
 
 	/**
 	 * Returns all the cemeteries
 	 * @return
 	 */
-	//public List<Cemetery> getCemeteries();
+	public List<Cemetery> getCemeteries();
 	
 }

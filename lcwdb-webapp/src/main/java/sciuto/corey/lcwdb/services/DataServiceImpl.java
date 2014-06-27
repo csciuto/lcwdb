@@ -1,20 +1,27 @@
 package sciuto.corey.lcwdb.services;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+
+import sciuto.corey.lcwdb.model.Cemetery;
+import sciuto.corey.lcwdb.model.QueryByName;
+import sciuto.corey.lcwdb.model.QueryByNameResultRecord;
+import sciuto.corey.lcwdb.model.SoldierResultRecord;
 
 @Service
 public class DataServiceImpl implements DataService {
 
 	private static final Logger LOGGER = Logger.getLogger(DataServiceImpl.class);
-	/*
-	@Autowired
-	DataDao dataDao;
+
+	//@Autowired
+	//DataDao dataDao;
 
 	@Override
 	public QueryResultList<QueryByNameResultRecord> queryByName(QueryByName query) {
 		
-		List<QueryByNameResultRecord> records = dataDao.queryByName(query);
+		List<QueryByNameResultRecord> records = null;//dataDao.queryByName(query);
 		
 		QueryResultList<QueryByNameResultRecord> results = new QueryResultList<QueryByNameResultRecord>();
 		results.setTotalResults(records.size());
@@ -35,14 +42,14 @@ public class DataServiceImpl implements DataService {
 	
 	@Override
 	public SoldierResultRecord querySoldier(Integer id) throws IllegalArgumentException {
-		return dataDao.querySoldier(id);
+		return null; //dataDao.querySoldier(id);
 	}
 
 	@Override
 	public List<Cemetery> getCemeteries() {
-		return dataDao.getCemeteries();
+		return null; //dataDao.getCemeteries();
 	}
-
+/*
 	public DataDao getDataDao() {
 		return dataDao;
 	}
@@ -51,7 +58,4 @@ public class DataServiceImpl implements DataService {
 		this.dataDao = dataDao;
 	}
 	*/
-	
-	
-	
 }
