@@ -3,10 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>lowell-civil-war-database</groupId>
-    <artifactId>lcwdb-jar</artifactId>
+    <artifactId>lcwdb-webapp</artifactId>
     <version>0.1.1-SNAPSHOT</version>
+    <packaging>war</packaging>
 
-    <name>lcwdb-jar</name>
+    <name>lcwdb-webapp</name>
     <url>http://maven.apache.org</url>
 
     <parent>
@@ -48,7 +49,7 @@
                         </execution>
                     </executions>
                     <configuration>
-                        <mainClass>sciuto.corey.lcwdb.Example</mainClass>
+                        <mainClass>sciuto.corey.lcwdb.MainConfiguration</mainClass>
                         <layout>ZIP</layout>
                     </configuration>
                 </plugin>
