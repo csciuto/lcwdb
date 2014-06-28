@@ -13,11 +13,9 @@
 </head>
 <body>
 	<div id="mainBody">
-		<%@include file="header.jsp" %>
 		
 		Hello, world!
 	
-		<%@include file="footer.jsp" %>
 
 	</div>
 
