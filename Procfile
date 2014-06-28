@@ -1,1 +1,1 @@
-web: java -jar lcwdb-webapp/target/lcwdb.war
+web: java -jar lcwdb-webapp/target/lcwdb.jar
