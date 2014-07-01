@@ -68,7 +68,7 @@ public class QueryController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView firstPage(QueryByName queryByName) {
         LOGGER.debug("Serving /");
-
+/* TODO: Causing NPE right now..
         if (cemeteries == null) {
             LOGGER.debug("Initializing list of cemeteries...");
             cemeteries = new ArrayList<Cemetery>();
@@ -78,11 +78,13 @@ public class QueryController {
             cemeteries.add(empty);
             cemeteries.addAll(dataService.getCemeteries());
         }
-
+*/
         ModelAndView model = new ModelAndView("home");
-        model.getModel().put("queryByName", queryByName);
+        /*
+         model.getModel().put("queryByName", queryByName);
         model.getModel().put("cemeteries", cemeteries);
         model.getModel().put("sortBy", sortBy);
+        */
         return model;
     }
 
