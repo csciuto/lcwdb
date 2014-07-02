@@ -1,5 +1,5 @@
 --
--- Table structure for TABLE company_regiment
+-- TODO: Is this table used?
 --
 
 DROP TABLE IF EXISTS company_regiment;

@@ -1,5 +1,5 @@
 --
--- Table structure for TABLE ship_assignment
+-- Ship assignments.
 --
 
 DROP TABLE IF EXISTS ship_assignment;

@@ -1,5 +1,5 @@
 --
--- Table structure for TABLE monument_type
+-- Upright, etc
 --
 
 DROP TABLE IF EXISTS monument_type;

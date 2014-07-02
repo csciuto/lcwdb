@@ -1,5 +1,5 @@
 --
--- Table structure for TABLE soldier_rank
+-- Ranks
 --
 
 DROP TABLE IF EXISTS soldier_rank;

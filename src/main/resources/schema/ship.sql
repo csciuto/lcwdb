@@ -1,5 +1,5 @@
 --
--- Table structure for TABLE ship
+-- Ships
 --
 
 DROP TABLE IF EXISTS ship;

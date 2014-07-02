@@ -1,5 +1,5 @@
 --
--- Table structure for TABLE soldier_media
+-- This table allows a many-to-many mapping of solider records to media
 --
 
 DROP TABLE IF EXISTS soldier_media;

@@ -1,5 +1,6 @@
 --
--- Table structure for TABLE company
+-- A company table
+-- Also has a "no company" company.
 --
 
 DROP TABLE IF EXISTS company;

@@ -1,0 +1,14 @@
+@media.sql
+@notes.sql
+@monument_type.sql
+@place.sql
+@cemetery.sql
+@regiment.sql
+@company.sql
+@soldier_rank.sql
+@ship.sql
+@soldier.sql
+@company_assignment.sql
+@ship_assignment.sql
+@soldier_media.sql
+@company_regiment.sql

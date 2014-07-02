@@ -1,6 +1,5 @@
---
--- Table structure for TABLE media
---
+-- Media records. For now, it's only mapped to soldiers, but it could
+-- be mapped to units, cemeteries, etc.
 
 DROP TABLE IF EXISTS media;
 CREATE TABLE media (

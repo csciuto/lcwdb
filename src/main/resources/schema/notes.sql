@@ -1,5 +1,5 @@
 --
--- Table structure for TABLE notes
+-- For extra information.
 --
 
 DROP TABLE IF EXISTS notes;

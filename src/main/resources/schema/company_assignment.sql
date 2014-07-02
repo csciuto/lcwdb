@@ -1,5 +1,6 @@
 --
--- Table structure for TABLE company_assignment
+-- Yet another degree of indirection! Since a soldier can have been in
+-- more than one unit, we need a many-to-many mapping table;
 --
 
 DROP TABLE IF EXISTS company_assignment;

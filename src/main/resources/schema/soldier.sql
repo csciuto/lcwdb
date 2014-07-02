@@ -1,5 +1,5 @@
 --
--- Table structure for TABLE soldier
+-- A solider
 --
 
 DROP TABLE IF EXISTS soldier;

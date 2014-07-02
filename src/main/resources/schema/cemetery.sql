@@ -1,5 +1,5 @@
 --
--- Table structure for TABLE cemetery
+-- A cemetery record
 --
 
 DROP TABLE IF EXISTS cemetery;

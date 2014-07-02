@@ -1,5 +1,5 @@
 --
--- Table structure for TABLE regiment
+-- A simple regiment table
 --
 
 DROP TABLE IF EXISTS regiment;

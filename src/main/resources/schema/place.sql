@@ -1,5 +1,5 @@
 --
--- Table structure for TABLE place
+-- This table is used by soliders, cemeteries, and death records
 --
 
 DROP TABLE IF EXISTS place;
