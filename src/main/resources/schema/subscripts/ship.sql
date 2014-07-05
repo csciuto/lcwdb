@@ -4,7 +4,7 @@
 
 DROP TABLE IF EXISTS ship CASCADE;
 CREATE TABLE ship (
-  ship_id numeric(6) NOT NULL AUTO_INCREMENT,
+  ship_id SERIAL,
   ship_name varchar(255) DEFAULT NULL,
   PRIMARY KEY (ship_id),
   UNIQUE (ship_name)

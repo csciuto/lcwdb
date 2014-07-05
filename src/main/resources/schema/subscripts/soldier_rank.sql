@@ -4,7 +4,7 @@
 
 DROP TABLE IF EXISTS soldier_rank CASCADE;
 CREATE TABLE soldier_rank (
-  rank_id numeric(6) SEQUENCE,
+  rank_id SERIAL,
   rank_name varchar(50) NOT NULL,
   PRIMARY KEY (rank_id),
   UNIQUE (rank_name)

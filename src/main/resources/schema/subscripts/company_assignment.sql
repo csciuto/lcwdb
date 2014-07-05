@@ -5,10 +5,11 @@
 
 DROP TABLE IF EXISTS company_assignment CASCADE;
 CREATE TABLE company_assignment (
-  soldier_id numeric(9) NOT NULL,
-  company_id numeric(9) NOT NULL,
+  soldier_id INTEGER NOT NULL,
+  company_id INTEGER NOT NULL,
   UNIQUE (soldier_id,company_id),
-  FORIEGN KEY (company) REFERENCES company (company_id)
+  FOREIGN KEY (company_id) REFERENCES company (company_id),
+  FOREIGN KEY (soldier_id) REFERENCES soldier (soldier_id)
 );
 
 --

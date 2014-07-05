@@ -10,9 +10,9 @@ CREATE TABLE soldier (
   middle_initial varchar(2) DEFAULT NULL,
   last_name varchar(25) NOT NULL,
   suffix varchar(5) DEFAULT NULL,
-  rank_id NUMERIC DEFAULT NULL,
+  rank_id INTEGER DEFAULT NULL,
   place_of_residence_id INTEGER DEFAULT NULL,
-  note_id NUMERIC DEFAULT NULL,
+  note_id INTEGER DEFAULT NULL,
   cemetery_id numeric(9) DEFAULT NULL,
   monument_type_id numeric(9) DEFAULT NULL,
   place_of_death_id INTEGER  DEFAULT NULL,
@@ -20,12 +20,12 @@ CREATE TABLE soldier (
   cemetery_book_page numeric(6) DEFAULT NULL,
   fivehundred_club numeric(1) DEFAULT NULL,
   year_of_death numeric(6) DEFAULT NULL,
-  date_of_death numeric DEFAULT NULL,
+  date_of_death date DEFAULT NULL,
   PRIMARY KEY (soldier_id),
-  FOREIGN KEY rank_id REFERENCES rank (rank_id),
-  FOREIGN KEY place_of_residence_id REFERENCES place (place_id),
-  FOREIGN KEY place_of_death_id REFERENCES place (place_id),
-  FOREIGN KEY note_id REFERENCES note (note_id)
+  FOREIGN KEY (rank_id) REFERENCES soldier_rank (rank_id),
+  FOREIGN KEY (place_of_residence_id) REFERENCES place (place_id),
+  FOREIGN KEY (place_of_death_id) REFERENCES place (place_id),
+  FOREIGN KEY (note_id) REFERENCES notes (note_id)
 );
 
 --

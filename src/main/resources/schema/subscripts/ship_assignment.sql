@@ -5,9 +5,9 @@
 DROP TABLE IF EXISTS ship_assignment CASCADE;
 CREATE TABLE ship_assignment (
   ship_id numeric(6) NOT NULL,
-  soldier_id NUMERIC  NOT NULL,
+  soldier_id INTEGER NOT NULL,
   UNIQUE (ship_id,soldier_id),
-  FOREIGN KEY (soldier_id) REFERNCES soldier (soldier_id)
+  FOREIGN KEY (soldier_id) REFERENCES soldier (soldier_id)
 );
 
 --
