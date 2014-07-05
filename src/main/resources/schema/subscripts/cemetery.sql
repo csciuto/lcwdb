@@ -2,13 +2,13 @@
 -- A cemetery record
 --
 
-DROP TABLE IF EXISTS cemetery;
+DROP TABLE IF EXISTS cemetery CASCADE;
 CREATE TABLE cemetery (
   cemetery_id SERIAL,
   cemetery_name varchar(50) DEFAULT NULL,
-  location_id numeric(9) DEFAULT NULL,
+  location_id INTEGER DEFAULT NULL,
   PRIMARY KEY (cemetery_id),
-  UNIQUE (location_id)
+  FOREIGN KEY (location_id) REFERENCES place (place_id)
 );
 
 --

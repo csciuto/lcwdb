@@ -2,12 +2,12 @@
 -- Ship assignments.
 --
 
-DROP TABLE IF EXISTS ship_assignment;
+DROP TABLE IF EXISTS ship_assignment CASCADE;
 CREATE TABLE ship_assignment (
   ship_id numeric(6) NOT NULL,
-  soldier_id numeric(9) NOT NULL,
-  UNIQUE ('ship_id','soldier_id'),
-  KEY (soldier_id)
+  soldier_id NUMERIC  NOT NULL,
+  UNIQUE (ship_id,soldier_id),
+  FOREIGN KEY (soldier_id) REFERNCES soldier (soldier_id)
 );
 
 --

@@ -2,7 +2,7 @@
 -- This table allows a many-to-many mapping of solider records to media
 --
 
-DROP TABLE IF EXISTS soldier_media;
+DROP TABLE IF EXISTS soldier_media CASCADE;
 CREATE TABLE soldier_media (
   soldier_id numeric(9) NOT NULL,
   media_id numeric(9) NOT NULL,

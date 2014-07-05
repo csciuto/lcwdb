@@ -2,7 +2,7 @@
 -- A solider
 --
 
-DROP TABLE IF EXISTS soldier;
+DROP TABLE IF EXISTS soldier CASCADE;
 CREATE TABLE soldier (
   soldier_id SERIAL,
   spreadsheet_id numeric(9) DEFAULT NULL,
@@ -10,22 +10,22 @@ CREATE TABLE soldier (
   middle_initial varchar(2) DEFAULT NULL,
   last_name varchar(25) NOT NULL,
   suffix varchar(5) DEFAULT NULL,
-  rank_id numeric(6) DEFAULT NULL,
-  place_of_residence_id numeric(9) DEFAULT NULL,
-  note_id numeric(9) DEFAULT NULL,
+  rank_id NUMERIC DEFAULT NULL,
+  place_of_residence_id INTEGER DEFAULT NULL,
+  note_id NUMERIC DEFAULT NULL,
   cemetery_id numeric(9) DEFAULT NULL,
   monument_type_id numeric(9) DEFAULT NULL,
-  place_of_death_id numeric(9) DEFAULT NULL,
+  place_of_death_id INTEGER  DEFAULT NULL,
   cemetery_lot varchar(50) DEFAULT NULL,
   cemetery_book_page numeric(6) DEFAULT NULL,
   fivehundred_club numeric(1) DEFAULT NULL,
   year_of_death numeric(6) DEFAULT NULL,
   date_of_death numeric DEFAULT NULL,
   PRIMARY KEY (soldier_id),
-  KEY rank_id (rank_id),
-  KEY place_of_residence_id (place_of_residence_id),
-  KEY place_of_death_id (place_of_death_id),
-  KEY note_id (note_id)
+  FOREIGN KEY rank_id REFERENCES rank (rank_id),
+  FOREIGN KEY place_of_residence_id REFERENCES place (place_id),
+  FOREIGN KEY place_of_death_id REFERENCES place (place_id),
+  FOREIGN KEY note_id REFERENCES note (note_id)
 );
 
 --

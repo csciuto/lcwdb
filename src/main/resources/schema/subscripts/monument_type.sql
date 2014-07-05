@@ -2,7 +2,7 @@
 -- Upright, etc
 --
 
-DROP TABLE IF EXISTS monument_type;
+DROP TABLE IF EXISTS monument_type CASCADE;
 CREATE TABLE monument_type (
   monument_type_id SERIAL,
   monument_type_name varchar(50) DEFAULT NULL,

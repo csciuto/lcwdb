@@ -2,7 +2,7 @@
 -- Ships
 --
 
-DROP TABLE IF EXISTS ship;
+DROP TABLE IF EXISTS ship CASCADE;
 CREATE TABLE ship (
   ship_id numeric(6) NOT NULL AUTO_INCREMENT,
   ship_name varchar(255) DEFAULT NULL,

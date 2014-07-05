@@ -2,9 +2,9 @@
 -- Ranks
 --
 
-DROP TABLE IF EXISTS soldier_rank;
+DROP TABLE IF EXISTS soldier_rank CASCADE;
 CREATE TABLE soldier_rank (
-  rank_id numeric(6) NOT NULL AUTO_INCREMENT,
+  rank_id numeric(6) SEQUENCE,
   rank_name varchar(50) NOT NULL,
   PRIMARY KEY (rank_id),
   UNIQUE (rank_name)

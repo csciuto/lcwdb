@@ -2,7 +2,7 @@
 -- For extra information.
 --
 
-DROP TABLE IF EXISTS notes;
+DROP TABLE IF EXISTS notes CASCADE;
 CREATE TABLE notes (
   note_id SERIAL,
   note varchar(255) DEFAULT NULL,

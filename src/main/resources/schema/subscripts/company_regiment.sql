@@ -2,14 +2,14 @@
 -- TODO: Is this table used?
 --
 
-DROP TABLE IF EXISTS company_regiment;
+DROP TABLE IF EXISTS company_regiment CASCADE;
 CREATE TABLE company_regiment (
   company_regiment_id SERIAL,
-  regiment_id numeric(9) NOT NULL,
+  regiment_id INTEGER NOT NULL,
   company_id numeric(9) DEFAULT NULL,
   PRIMARY KEY (company_regiment_id),
   UNIQUE (company_id),
-  KEY (regiment_id)
+  FOREIGN KEY (regiment_id) REFERENCES regiment (regiment_id) 
 );
 
 --

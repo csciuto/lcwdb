@@ -3,7 +3,7 @@
 -- Also has a "no company" company.
 --
 
-DROP TABLE IF EXISTS company;
+DROP TABLE IF EXISTS company CASCADE;
 CREATE TABLE company (
   company_id SERIAL,
   company_name varchar(50) DEFAULT NULL,

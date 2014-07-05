@@ -1,14 +1,14 @@
-@media.sql
-@notes.sql
-@monument_type.sql
-@place.sql
-@cemetery.sql
-@regiment.sql
-@company.sql
-@soldier_rank.sql
-@ship.sql
-@soldier.sql
-@company_assignment.sql
-@ship_assignment.sql
-@soldier_media.sql
-@company_regiment.sql
+\i 'subscripts/media.sql'
+\i 'subscripts/notes.sql'
+\i 'subscripts/monument_type.sql'
+\i 'subscripts/place.sql'
+\i 'subscripts/cemetery.sql'
+\i 'subscripts/regiment.sql'
+\i 'subscripts/company.sql'
+\i 'subscripts/soldier_rank.sql'
+\i 'subscripts/ship.sql'
+\i 'subscripts/soldier.sql'
+\i 'subscripts/company_assignment.sql'
+\i 'subscripts/ship_assignment.sql'
+\i 'subscripts/soldier_media.sql'
+\i 'subscripts/company_regiment.sql'

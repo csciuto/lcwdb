@@ -2,13 +2,13 @@
 -- This table is used by soliders, cemeteries, and death records
 --
 
-DROP TABLE IF EXISTS place;
+DROP TABLE IF EXISTS place CASCADE;
 CREATE TABLE place (
   place_id SERIAL,
   city_name varchar(50) NOT NULL,
   state_code varchar(2) NOT NULL,
   PRIMARY KEY (place_id),
-  UNIQUE ('city_name','state_code')
+  UNIQUE (city_name,state_code)
 );
 
 --

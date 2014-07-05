@@ -2,7 +2,7 @@
 -- A simple regiment table
 --
 
-DROP TABLE IF EXISTS regiment;
+DROP TABLE IF EXISTS regiment CASCADE;
 CREATE TABLE regiment (
   regiment_id SERIAL,
   regiment_name varchar(50) NOT NULL,
