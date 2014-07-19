@@ -3,6 +3,7 @@ package sciuto.corey.lcwdb.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.HttpSessionRequiredException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,195 +24,191 @@ import sciuto.corey.lcwdb.services.QueryResultList;
 // We don't want to lose these from the model when changing pages.
 public class QueryController {
 
-    private static final Logger LOGGER = Logger.getLogger(QueryController.class);
+	private static final Logger LOGGER = Logger.getLogger(QueryController.class);
 
-    @Autowired
-    private DataService dataService;
+	@Autowired
+	private DataService dataService;
 
-    /**
-     * The list of cemeteries. We want this stored in once place.
-     */
-    private List<Cemetery> cemeteries = null;
-    private final int NULL_CEMETERY_ID = -1;
+	/**
+	 * The list of cemeteries. We want this stored in once place.
+	 */
+	private List<Cemetery> cemeteries = null;
+	private final int NULL_CEMETERY_ID = -1;
 
-    private List<SortBy> sortBy;
+	private List<SortBy> sortBy;
 
-    public QueryController() {
-        sortBy = new ArrayList<SortBy>();
+	public QueryController() {
+		sortBy = new ArrayList<SortBy>();
 
-        SortBy nameAsc = new SortBy();
-        nameAsc.setSortType(SortBy.SortType.NAME_ASC);
-        SortBy nameDesc = new SortBy();
-        nameDesc.setSortType(SortBy.SortType.NAME_DESC);
+		SortBy nameAsc = new SortBy();
+		nameAsc.setSortType(SortBy.SortType.NAME_ASC);
+		SortBy nameDesc = new SortBy();
+		nameDesc.setSortType(SortBy.SortType.NAME_DESC);
 
-        SortBy dodAsc = new SortBy();
-        dodAsc.setSortType(SortBy.SortType.DOD_ASC);
-        SortBy dodDesc = new SortBy();
-        dodDesc.setSortType(SortBy.SortType.DOD_DESC);
+		SortBy dodAsc = new SortBy();
+		dodAsc.setSortType(SortBy.SortType.DOD_ASC);
+		SortBy dodDesc = new SortBy();
+		dodDesc.setSortType(SortBy.SortType.DOD_DESC);
 
-        sortBy.add(nameAsc);
-        sortBy.add(nameDesc);
-        sortBy.add(dodAsc);
-        sortBy.add(dodDesc);
-    }
-    
-    @RequestMapping(value = "/test")
-    public ModelAndView testView(){
-        return new ModelAndView("test");
-    }
+		sortBy.add(nameAsc);
+		sortBy.add(nameDesc);
+		sortBy.add(dodAsc);
+		sortBy.add(dodDesc);
+	}
 
-    /**
-     * The landing page. Display an empty form.
-     * 
-     * @param queryByName
-     * @return
-     */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView firstPage(QueryByName queryByName) {
-        LOGGER.debug("Serving /");
-/* TODO: Causing NPE right now..
-        if (cemeteries == null) {
-            LOGGER.debug("Initializing list of cemeteries...");
-            cemeteries = new ArrayList<Cemetery>();
-            Cemetery empty = new Cemetery();
-            empty.setId(NULL_CEMETERY_ID);
-            empty.setName("ALL");
-            cemeteries.add(empty);
-            cemeteries.addAll(dataService.getCemeteries());
-        }
-*/
-        ModelAndView model = new ModelAndView("home");
-        /*
-         model.getModel().put("queryByName", queryByName);
-        model.getModel().put("cemeteries", cemeteries);
-        model.getModel().put("sortBy", sortBy);
-        */
-        return model;
-    }
+	@RequestMapping(value = "/test")
+	public ModelAndView testView() {
+		return new ModelAndView("test");
+	}
 
-    /**
-     * If somebody does a GET on the POST URL, just kick them back.
-     * 
-     * @param queryByName
-     * @return
-     */
-    @RequestMapping(value = "/queryByName", method = RequestMethod.GET)
-    public ModelAndView getOnQueryByName(@ModelAttribute("queryByName") QueryByName queryByName) {
-        return firstPage(queryByName);
-    }
+	/**
+	 * The landing page. Display an empty form.
+	 * 
+	 * @param queryByName
+	 * @return
+	 */
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public ModelAndView firstPage(QueryByName queryByName) {
+		LOGGER.debug("Serving /");
+		if (cemeteries == null) {
+			LOGGER.debug("Initializing list of cemeteries...");
+			cemeteries = new ArrayList<Cemetery>();
+			Cemetery empty = new Cemetery();
+			empty.setId(NULL_CEMETERY_ID);
+			empty.setName("ALL");
+			cemeteries.add(empty);
+			cemeteries.addAll(dataService.getCemeteries());
+		}
+		ModelAndView model = new ModelAndView("home");
+		model.getModel().put("queryByName", queryByName);
+		model.getModel().put("cemeteries", cemeteries);
+		model.getModel().put("sortBy", sortBy);
+		return model;
+	}
 
-    /**
-     * The main request method for searching by soldier name and/or cemetery.
-     * 
-     * @param queryByName
-     *            Must be Valid.
-     * @return
-     */
-    @RequestMapping(value = "/queryByName", method = RequestMethod.POST)
-    public ModelAndView queryByName(@Valid @ModelAttribute("queryByName") QueryByName queryByName, BindingResult bindingResult) {
-        LOGGER.debug("Serving /queryByName");
+	/**
+	 * If somebody does a GET on the POST URL, just kick them back.
+	 * 
+	 * @param queryByName
+	 * @return
+	 */
+	@RequestMapping(value = "/queryByName", method = RequestMethod.GET)
+	public ModelAndView getOnQueryByName(@ModelAttribute("queryByName") QueryByName queryByName) {
+		return firstPage(queryByName);
+	}
 
-        if (bindingResult.hasErrors()) {
-            for (ObjectError e : bindingResult.getAllErrors()) {
-                LOGGER.error("Binding Error: " + e.getDefaultMessage());
-            }
-            ModelAndView model = new ModelAndView("home");
-            // Put back the existing model so we don't lose it.
-            model.getModel().put("queryByName", queryByName);
-            model.getModel().put("cemeteries", cemeteries);
-            model.getModel().put("sortBy", sortBy);
-            return model;
-        }
+	/**
+	 * The main request method for searching by soldier name and/or cemetery.
+	 * 
+	 * @param queryByName
+	 *            Must be Valid.
+	 * @return
+	 */
+	@RequestMapping(value = "/queryByName", method = RequestMethod.POST)
+	public ModelAndView queryByName(@Valid @ModelAttribute("queryByName") QueryByName queryByName,
+			BindingResult bindingResult) {
+		LOGGER.debug("Serving /queryByName");
 
-        if (queryByName.getCemeteryId().equals(NULL_CEMETERY_ID)) {
-            queryByName.setCemeteryId(null);
-        }
+		if (bindingResult.hasErrors()) {
+			for (ObjectError e : bindingResult.getAllErrors()) {
+				LOGGER.error("Binding Error: " + e.getDefaultMessage());
+			}
+			ModelAndView model = new ModelAndView("home");
+			// Put back the existing model so we don't lose it.
+			model.getModel().put("queryByName", queryByName);
+			model.getModel().put("cemeteries", cemeteries);
+			model.getModel().put("sortBy", sortBy);
+			return model;
+		}
 
-        ModelAndView model = new ModelAndView("home");
+		if (queryByName.getCemeteryId().equals(NULL_CEMETERY_ID)) {
+			queryByName.setCemeteryId(null);
+		}
 
-        QueryResultList<QueryByNameResultRecord> resultList = dataService.queryByName(queryByName);
+		ModelAndView model = new ModelAndView("home");
 
-        // Put back the existing model so we don't lose it.
-        model.getModel().put("queryByNameResults", resultList);
-        model.getModel().put("queryByName", queryByName);
-        model.getModel().put("cemeteries", cemeteries);
-        model.getModel().put("sortBy", sortBy);
-        return model;
-    }
+		QueryResultList<QueryByNameResultRecord> resultList = dataService.queryByName(queryByName);
 
-    /**
-     * Displays the soldier detail page.
-     * 
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/soldier", method = RequestMethod.GET)
-    public ModelAndView queryBySoldier(@RequestParam(value = "id", required = true) Integer id) {
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Serving /soldier?" + id);
-        }
+		// Put back the existing model so we don't lose it.
+		model.getModel().put("queryByNameResults", resultList);
+		model.getModel().put("queryByName", queryByName);
+		model.getModel().put("cemeteries", cemeteries);
+		model.getModel().put("sortBy", sortBy);
+		return model;
+	}
 
-        ModelAndView model = new ModelAndView("soldier");
-        SoldierResultRecord resultRecord = dataService.querySoldier(id);
-        model.getModel().put("soldierRecord", resultRecord);
-        return model;
-    }
+	/**
+	 * Displays the soldier detail page.
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/soldier", method = RequestMethod.GET)
+	public ModelAndView queryBySoldier(@RequestParam(value = "id", required = true) Integer id) {
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("Serving /soldier?" + id);
+		}
 
-    /*
-     * @RequestMapping(value="/404", method=RequestMethod.GET) public ModelAndView notFound(HttpServletRequest req) {
-     * LOGGER.warn("A page request was not found.");
-     * 
-     * return new ModelAndView("404"); }
-     */
+		ModelAndView model = new ModelAndView("soldier");
+		SoldierResultRecord resultRecord = dataService.querySoldier(id);
+		model.getModel().put("soldierRecord", resultRecord);
+		return model;
+	}
 
-    /**
-     * Once we've left the controller, this handles exceptions redirected here by the servlet...
-     * 
-     * @param req
-     * @param exception
-     * @return
-     */
-    /*
-     * @RequestMapping(value={"/500"}, method=RequestMethod.GET) public ModelAndView
-     * escapedServerError(HttpServletRequest req, Exception exception) { return defaultExceptionHandler(req,exception);
-     * }
-     */
+	@RequestMapping(value = "/404", method = RequestMethod.GET)
+	public ModelAndView notFound(HttpServletRequest req) {
+		LOGGER.warn("A page request was not found.");
 
-    /*
-     * @ExceptionHandler(HttpSessionRequiredException.class) public ModelAndView handleNoSession(){ return new
-     * ModelAndView("redirect:/"); }
-     */
+		return new ModelAndView("404");
+	}
 
-    /*
-     * @ExceptionHandler(IllegalArgumentException.class) public ModelAndView handleIllegalArgument(){ return new
-     * ModelAndView("redirect:/404"); }
-     */
+	/**
+	 * Once we've left the controller, this handles exceptions redirected here
+	 * by the servlet...
+	 * 
+	 * @param req
+	 * @param exception
+	 * @return
+	 */
+	@RequestMapping(value = { "/500" }, method = RequestMethod.GET)
+	public ModelAndView escapedServerError(HttpServletRequest req, Exception exception) {
+		return defaultExceptionHandler(req, exception);
+	}
 
-    /*
-     * @ExceptionHandler(Exception.class) public ModelAndView defaultExceptionHandler(HttpServletRequest req, Exception
-     * exception) {
-     * 
-     * String request = req != null ? req.getRequestURL().toString() : "unknown request"; String exceptionMsg =
-     * exception != null ? exception.getMessage() : "unknown exception"; LOGGER.error("Request: " + request + " raised "
-     * + exceptionMsg, exception);
-     * 
-     * return new ModelAndView("error"); }
-     */
+	@ExceptionHandler(HttpSessionRequiredException.class)
+	public ModelAndView handleNoSession() {
+		return new ModelAndView("redirect:/");
+	}
 
-    public List<Cemetery> getCemeteries() {
-        return cemeteries;
-    }
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ModelAndView handleIllegalArgument() {
+		return new ModelAndView("redirect:/404");
+	}
 
-    public void setCemeteries(List<Cemetery> cemeteries) {
-        this.cemeteries = cemeteries;
-    }
+	@ExceptionHandler(Exception.class)
+	public ModelAndView defaultExceptionHandler(HttpServletRequest req, Exception exception) {
 
-    public DataService getDataService() {
-        return dataService;
-    }
+		String request = req != null ? req.getRequestURL().toString() : "unknown request";
+		String exceptionMsg = exception != null ? exception.getMessage() : "unknown exception";
+		LOGGER.error("Request: " + request + " raised " + exceptionMsg, exception);
 
-    public void setDataService(DataService dataService) {
-        this.dataService = dataService;
-    }
+		return new ModelAndView("error");
+	}
+
+	public List<Cemetery> getCemeteries() {
+		return cemeteries;
+	}
+
+	public void setCemeteries(List<Cemetery> cemeteries) {
+		this.cemeteries = cemeteries;
+	}
+
+	public DataService getDataService() {
+		return dataService;
+	}
+
+	public void setDataService(DataService dataService) {
+		this.dataService = dataService;
+	}
 
 }
