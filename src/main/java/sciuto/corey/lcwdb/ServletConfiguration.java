@@ -16,6 +16,9 @@ public class ServletConfiguration {
 
 	private static class MyCustomizer implements EmbeddedServletContainerCustomizer {
 
+		/**
+		 * Spring Boot by default sends 404s to the regular error handler...
+		 */
 		@Override
 		public void customize(ConfigurableEmbeddedServletContainer factory) {
 			factory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404"));

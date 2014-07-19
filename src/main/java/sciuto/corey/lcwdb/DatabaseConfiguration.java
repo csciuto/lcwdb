@@ -15,18 +15,28 @@ public class DatabaseConfiguration {
 	@Autowired
 	DataSource dataSource;
 	
+	/**
+	 * Not sure how else to do this. Spring Boot wants a properties file,
+	 * but Heroku requires you check an environment variable
+	 * (this code is from the Heroku example)
+	 * 
+	 * @return
+	 * @throws URISyntaxException
+	 */
 	@Bean
 	public DataSource dataSource() throws URISyntaxException {
         URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
         String username = dbUri.getUserInfo().split(":")[0];
         String password = dbUri.getUserInfo().split(":")[1];
-        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() + "&ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory";
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
 
         DataSource basicDataSource = new DataSource();
         basicDataSource.setUrl(dbUrl);
         basicDataSource.setUsername(username);
         basicDataSource.setPassword(password);
+        
+        basicDataSource.setDriverClassName("org.postgresql.Driver");
         
         return basicDataSource;
 	}

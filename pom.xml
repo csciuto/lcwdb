@@ -131,6 +131,11 @@
         <artifactId>commons-lang3</artifactId>
         <version>3.1</version>
       </dependency>
+      <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>9.3-1101-jdbc41</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -146,12 +151,15 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- <dependency> <groupId>org.glassfish.web</groupId> <artifactId>javax.el</artifactId> <version>2.2.4</version> </dependency> -->
-
     <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
       <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
     </dependency>
 
     <dependency>
