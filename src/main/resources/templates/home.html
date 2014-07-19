@@ -28,24 +28,62 @@
 				<li><a href="#byUnit">Unit</a></li>
 			</ul>
 			<div id="byName">
-				<!-- 
-				<sf:form  action="queryByName" method="POST" modelAttribute="queryByName" id="queryForm">
+				<form action="#" th:action="@{/queryByName}" method="POST" th:object="${queryByName}" id="queryForm">
 					<fieldset>
 						<p class="queryHelp">Use '%' for wildcard matching</p>
 						<label for="firstName">First name:</label>
-						<sf:input type="text" id="firstName" path="firstName"/>
+						<input type="text" id="firstName" th:field="*{firstName}" />
 						<br />
 						<label for="lastName">Last name:</label>
-						<sf:input type="text" id="lastName" path="lastName"/>
+						<input type="text" id="lastName" th:field="*{lastName}" />
+						<br />
+						<input type="submit" value="Submit" />
 					</fieldset>
 					<br />
 					<fieldset>
 						<label for="cemeteryNames">Cemetery Name</label>
-						<sf:select id="cemeteryNames" path="cemeteryId" items="${cemeteries}" itemLabel="name" itemValue="id"></sf:select>
+						<select id="cemeteryNames" th:field="*{cemeteryId}">
+						  <option th:each="cemetery : ${cemeteries}" th:value="${id}" th:text="${name}">.</option>
+						</select>
 						<br />
 						<label for="fiveHundredClub">500 Club (War Casualty)</label>
-						<sf:checkbox id="fiveHundredClub" path="fiveHundredClub"/>
+						<input id="fiveHundredClub" type="checkbox" th:field="*{fiveHundredClub}" />
 					</fieldset>
+				</form>
+				<div id="results">
+					<div id="resultsInfo" th:if="${queryByNameResults}">
+						<div th:if="${not queryByNameResults.truncated}">
+							<p>Returned ${fn:length(queryByNameResults.results)} records</p>
+						</div>
+						<div th:if="${queryByNameResults.truncated}">
+							<p class="warn">Returned too many records. Displaying first ${#queryByNameResults.results.count}. Please restrict your query.</p>
+						</div>
+					
+						<table id="resultsTable">
+							<tr>
+								<th>Last Name</th>
+								<th>First Name</th>
+								<th title="Middle Initial">M.</th>
+								<th title="Suffix">S.</th>
+								<th>Cemetery</th>
+								<th>Died</th>
+								<th title="War Casualty">500 Club</th>
+								<th>Details</th>
+							</tr>
+							<tr th:each="result : ${queryByNameResults.results}">
+								<td th:text="${result.lastName}"></td>
+								<td th:text="${result.firstName}"></td>
+								<td th:text="${result.middleInitial}"></td>
+								<td th:text="${result.suffix}"></td>
+								<td th:text="${result.cemeteryName}"></td>
+								<td th:text="${result.dateOfDeath}"></td>
+								<td th:text="${result.killedInAction ? '*' : '' }"></td>
+								<td><a th:href="/lcwdb/soldier?id=${result.id}" href="/lcwdb/soldier?id=">Details</a></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<!-- 
 					<br />
 					<fieldset>
 						<p class="queryHelp">Enter dates in YYYY-MM-DD format</p>
@@ -66,44 +104,7 @@
 					<br />
 					<input type="submit" value="Submit" />
 				</sf:form>
-				<div id="results">
-					<div id="resultsInfo">
-						<c:if test="${queryByNameResults != null}">
-							<c:if test="${queryByNameResults.truncated != true}">
-								<p>Returned ${fn:length(queryByNameResults.results)} records</p>
-							</c:if>
-							<c:if test="${queryByNameResults.truncated == true}">
-								<p class="warn">Returned too many records. Displaying first ${fn:length(queryByNameResults.results)}. Please restrict your query.</p>
-							</c:if>
-						</c:if>
-					</div>
-					<table id="resultsTable">
-						<tr>
-							<th>Last Name</th>
-							<th>First Name</th>
-							<th title="Middle Initial">M.</th>
-							<th title="Suffix">S.</th>
-							<th>Cemetery</th>
-							<th>Died</th>
-							<th title="War Casualty">500 Club</th>
-							<th>Details</th>
-						</tr>
-						<c:if test="${queryByNameResults != null}">
-							<c:forEach var="result" items="${queryByNameResults.results}">
-								<tr>
-									<td>${result.lastName}</td>
-									<td>${result.firstName}</td>
-									<td>${result.middleInitial}</td>
-									<td>${result.suffix}</td>
-									<td>${result.cemeteryName}</td>
-									<td>${result.dateOfDeath}</td>
-									<td><c:if test="${result.killedInAction == true}">*</c:if></td>
-									<td><a href="/lcwdb/soldier?id=${result.id}">Details</a></td>
-								</tr>
-							</c:forEach>
-						</c:if>
-					</table>
-				</div>
+				
 				-->
 			</div>
 			<div id="byUnit">Lorem ipsum dolor sit amet, consectetuer

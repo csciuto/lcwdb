@@ -31,7 +31,7 @@
     </logger>
 
     <logger name="org.springframework.web">
-      <level value="trace" />
+      <level value="info" />
     </logger>
 
     <logger name="sciuto.corey.lcwdb">
