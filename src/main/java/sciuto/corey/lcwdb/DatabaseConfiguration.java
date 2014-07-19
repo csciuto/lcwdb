@@ -15,7 +15,7 @@ public class DatabaseConfiguration {
 	@Autowired
 	DataSource dataSource;
 	
-	@Bean(name="dataSource")
+	@Bean
 	public DataSource dataSource() throws URISyntaxException {
         URI dbUri = new URI(System.getenv("DATABASE_URL"));
 

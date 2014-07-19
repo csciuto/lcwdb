@@ -154,15 +154,8 @@ public class QueryController {
 		model.getModel().put("soldierRecord", resultRecord);
 		return model;
 	}
-
-	@RequestMapping(value = "/404", method = RequestMethod.GET)
-	public ModelAndView notFound(HttpServletRequest req) {
-		LOGGER.warn("A page request was not found.");
-
-		return new ModelAndView("404");
-	}
-
-	/**
+	
+	/* *
 	 * Once we've left the controller, this handles exceptions redirected here
 	 * by the servlet...
 	 * 
@@ -170,10 +163,12 @@ public class QueryController {
 	 * @param exception
 	 * @return
 	 */
+	/*
 	@RequestMapping(value = { "/500" }, method = RequestMethod.GET)
 	public ModelAndView escapedServerError(HttpServletRequest req, Exception exception) {
 		return defaultExceptionHandler(req, exception);
 	}
+	*/
 
 	@ExceptionHandler(HttpSessionRequiredException.class)
 	public ModelAndView handleNoSession() {
