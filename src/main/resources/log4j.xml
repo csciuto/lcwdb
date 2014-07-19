@@ -19,23 +19,23 @@
 	</appender>
 
     <logger name="org.springframework">
-    	<level value="info" />
+    	<level value="debug" />
     </logger>
 
     <logger name="org.springframework.beans">
-      <level value="info" />
+      <level value="debug" />
     </logger>
 
     <logger name="org.springframework.boot">
-        <level value="info" />
+        <level value="debug" />
     </logger>
 
     <logger name="org.springframework.web">
-      <level value="info" />
+      <level value="debug" />
     </logger>
 
     <logger name="sciuto.corey.lcwdb">
-      <level value="info" />
+      <level value="debug" />
     </logger>
 
 	<root>
