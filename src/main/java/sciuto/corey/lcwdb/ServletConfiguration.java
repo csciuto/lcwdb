@@ -22,7 +22,6 @@ public class ServletConfiguration {
 		@Override
 		public void customize(ConfigurableEmbeddedServletContainer factory) {
 			factory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404"));
-			factory.setContextPath("/lcwdb");
 		}
 
 	}
