@@ -14,6 +14,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpSessionRequiredException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import sciuto.corey.lcwdb.model.*;
 import sciuto.corey.lcwdb.services.DataService;
@@ -155,6 +156,12 @@ public class QueryController {
 		return model;
 	}
 	
+	@RequestMapping(value = "/404")
+	public ModelAndView notFound(HttpServletRequest req) {
+		LOGGER.warn("A page request was not found.");
+
+		return new ModelAndView("404");
+	}
 	/* *
 	 * Once we've left the controller, this handles exceptions redirected here
 	 * by the servlet...

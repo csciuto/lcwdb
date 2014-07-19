@@ -13,9 +13,7 @@
 </head>
 <body>
 	<div id="mainBody">
-		<div th:fragment="header" class="header">
-			<h1>Lowell Civil War Veteran Database</h1>
-		</div>
+		<div th:replace="header :: header"></div>
 
 		<div class="error">
 			<h2>404 - Not Found.</h2>
@@ -26,12 +24,7 @@
 			<a href="./" onClick="history.back()">Go back</a>
 		</div>
 
-		<div th:fragment="footer" class="footer">
-			<p>Lowell Civil War Database</p>
-			<p>Data curated by Maurice Comtois</p>
-			<p>Compiled by Richard Howe, Jr. and Corey Sciuto</p>
-			<p>Code by Corey Sciuto</p>
-		</div>
+		<div th:replace="footer :: footer"></div>
 
 	</div>
 
