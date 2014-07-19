@@ -11,11 +11,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-@Profile("prod")
+@Profile("dev")
 @Configuration
-public class DatabaseConfiguration {
+public class DatabaseDevConfiguration {
 
-	private static final Logger LOGGER = Logger.getLogger(DatabaseConfiguration.class);
+	private static final Logger LOGGER = Logger.getLogger(DatabaseDevConfiguration.class);
 	
 	@Autowired
 	DataSource dataSource;
@@ -31,13 +31,13 @@ public class DatabaseConfiguration {
 	@Bean
 	public DataSource dataSource() throws URISyntaxException {
 		
-		LOGGER.info("Configuring PROD database");
+		LOGGER.info("Configuring TEST database");
 		
         URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
         String username = dbUri.getUserInfo().split(":")[0];
         String password = dbUri.getUserInfo().split(":")[1];
-        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() + "?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory";
 
         DataSource basicDataSource = new DataSource();
         basicDataSource.setUrl(dbUrl);
