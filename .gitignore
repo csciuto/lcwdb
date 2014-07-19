@@ -1,2 +1,6 @@
 lcwdb.log
 env.sh
+.classpath
+.project
+.settings/
+target/
