@@ -6,7 +6,6 @@ public class QueryResultList<T> {
 	
 	private List<T> results;
 	private boolean isTruncated;
-	private int totalResults;
 	
 	public List<T> getResults() {
 		return results;
@@ -20,13 +19,4 @@ public class QueryResultList<T> {
 	public void setTruncated(boolean isTruncated) {
 		this.isTruncated = isTruncated;
 	}
-	public int getTotalResults() {
-		return totalResults;
-	}
-	public void setTotalResults(int totalResults) {
-		this.totalResults = totalResults;
-	}
-	
-	
-	
 }

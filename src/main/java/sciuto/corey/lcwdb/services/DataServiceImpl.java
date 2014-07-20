@@ -26,7 +26,6 @@ public class DataServiceImpl implements DataService {
 		List<QueryByNameResultRecord> records = dataDao.queryByName(query);
 		
 		QueryResultList<QueryByNameResultRecord> results = new QueryResultList<QueryByNameResultRecord>();
-		results.setTotalResults(records.size());
 		results.setTruncated(false);
 		
 		if (records.size() > MAX_NAME_ROWS){

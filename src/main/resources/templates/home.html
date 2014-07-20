@@ -37,7 +37,6 @@
 						<label for="lastName">Last name:</label>
 						<input type="text" id="lastName" th:field="*{lastName}" />
 						<br />
-						<input type="submit" value="Submit" />
 					</fieldset>
 					<br />
 					<fieldset>
@@ -71,12 +70,9 @@
 				</form>
 				<div id="results">
 					<div id="resultsInfo" th:if="${queryByNameResults}">
-						<div th:if="${not queryByNameResults.truncated}">
-							<p>Returned ${fn:length(queryByNameResults.results)} records</p>
-						</div>
-						<div th:if="${queryByNameResults.truncated}">
-							<p class="warn">Returned too many records. Displaying first ${#queryByNameResults.results.count}. Please restrict your query.</p>
-						</div>
+
+						<p th:if="${not queryByNameResults.truncated}" th:inline="text">Returned [[${#lists.size(queryByNameResults.results)}]] records</p>
+						<p th:if="${queryByNameResults.truncated}" th:inline="text" class="warn">Returned too many records. Displaying first [[${#lists.size(queryByNameResults.results)}]]. Please restrict your query.</p>
 					
 						<table id="resultsTable">
 							<tr>
@@ -97,7 +93,7 @@
 								<td th:text="${result.cemeteryName}"></td>
 								<td th:text="${result.dateOfDeath}"></td>
 								<td th:text="${result.killedInAction ? '*' : '' }"></td>
-								<td><a th:href="/lcwdb/soldier?id=${result.id}" href="/lcwdb/soldier?id=">Details</a></td>
+								<td><a th:href="@{/lcwdb/soldier?id=${result.id}}" href="/lcwdb/soldier?id=">Details</a></td>
 							</tr>
 						</table>
 					</div>
