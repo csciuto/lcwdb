@@ -93,7 +93,7 @@
 								<td th:text="${result.cemeteryName}"></td>
 								<td th:text="${result.dateOfDeath}"></td>
 								<td th:text="${result.killedInAction ? '*' : '' }"></td>
-								<td><a th:href="@{/lcwdb/soldier?id=${result.id}}" href="/lcwdb/soldier?id=">Details</a></td>
+								<td><a th:href="@{/soldier(id=${result.id})}" href="/soldier?id=">Details</a></td>
 							</tr>
 						</table>
 					</div>

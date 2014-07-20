@@ -10,7 +10,7 @@
 	</appender>
 
 	<appender name="rollingFile" class="org.apache.log4j.RollingFileAppender">
-		<param name="file" value="lcwdb.log" />
+		<param name="file" value="logs/lcwdb.log" />
 		<param name="MaxFileSize" value="10000KB" />
 		<param name="MaxBackupIndex" value="5" />
 		<layout class="org.apache.log4j.PatternLayout">
