@@ -136,11 +136,11 @@ public class DataDaoImpl implements DataDao {
 			arguments.add(query.getCemeteryId());
 		}
 		if (StringUtils.isNotBlank(query.getStartDeathDate())){
-			whereClause.add("s.date_of_death >= ?");
+			whereClause.add("s.date_of_death >= date(?)");
 			arguments.add(query.getStartDeathDate());
 		}
 		if (StringUtils.isNotBlank(query.getEndDeathDate())){
-			whereClause.add("s.date_of_death <= ?");
+			whereClause.add("s.date_of_death <= date(?)");
 			arguments.add(query.getEndDeathDate());
 		}
 		
