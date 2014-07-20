@@ -49,6 +49,25 @@
 						<label for="fiveHundredClub">500 Club (War Casualty)</label>
 						<input id="fiveHundredClub" type="checkbox" th:field="*{fiveHundredClub}" />
 					</fieldset>
+					<br />
+					<fieldset>
+						<p class="queryHelp">Enter dates in YYYY-MM-DD format</p>
+						<label for="startDeathDateI">Died after</label>
+						<input type="text" id="startDeathDateI" th:field="*{startDeathDate}" th:errorclass="queryError"/>
+						<br />
+						<label for="endDeathDateI">Died before</label>
+						<input type="text" id="endDeathDateI" th:field="*{endDeathDate}" th:errorclass="queryError"/>
+					</fieldset>
+					<br />
+					<fieldset>
+						<label for="sortBy">Sort By</label>
+						<select id="sortBy" th:field="*{sortBy}">
+							<option th:each="sortTypeStr : ${sortBy}" th:value="${sortTypeStr.sortType}" th:text="${sortTypeStr.sortType}">.</option>
+						</select>
+						<br />
+					</fieldset>
+					<br />
+					<input type="submit" value="Submit" />
 				</form>
 				<div id="results">
 					<div id="resultsInfo" th:if="${queryByNameResults}">
@@ -83,29 +102,6 @@
 						</table>
 					</div>
 				</div>
-				<!-- 
-					<br />
-					<fieldset>
-						<p class="queryHelp">Enter dates in YYYY-MM-DD format</p>
-						<label for="startDeathDateI">Died after</label>
-						<sf:input type="text" id="startDeathDateI" path="startDeathDate"/>
-						<sf:errors path="startDeathDate" cssClass="queryError" />
-						<br />
-						<label for="endDeathDateI">Died before</label>
-						<sf:input type="text" id="endDeathDateI" path="endDeathDate"/>
-						<sf:errors path="endDeathDate" cssClass="queryError" />
-					</fieldset>
-					<br />
-					<fieldset>
-						<label for="sortBy">Sort By</label>
-						<sf:select id="sortBy" path="sortBy" items="${sortBy}" itemLabel="sortTypeStr" itemValue="sortTypeStr"></sf:select>
-						<br />
-					</fieldset>
-					<br />
-					<input type="submit" value="Submit" />
-				</sf:form>
-				
-				-->
 			</div>
 			<div id="byUnit">Lorem ipsum dolor sit amet, consectetuer
 				adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
