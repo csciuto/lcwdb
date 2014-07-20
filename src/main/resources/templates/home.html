@@ -53,9 +53,11 @@
 						<p class="queryHelp">Enter dates in YYYY-MM-DD format</p>
 						<label for="startDeathDateI">Died after</label>
 						<input type="text" id="startDeathDateI" th:field="*{startDeathDate}" th:errorclass="queryError"/>
+						<span class="queryError" th:if="${#fields.errors('startDeathDate')}" th:each="err : ${#fields.errors('startDeathDate')}" th:text="${err}">Error</span>
 						<br />
 						<label for="endDeathDateI">Died before</label>
 						<input type="text" id="endDeathDateI" th:field="*{endDeathDate}" th:errorclass="queryError"/>
+						<span class="queryError" th:if="${#fields.errors('endDeathDate')}" th:each="err : ${#fields.errors('endDeathDate')}" th:text="${err}">Error</span>
 					</fieldset>
 					<br />
 					<fieldset>
