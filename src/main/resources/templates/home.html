@@ -43,7 +43,7 @@
 					<fieldset>
 						<label for="cemeteryNames">Cemetery Name</label>
 						<select id="cemeteryNames" th:field="*{cemeteryId}">
-						  <option th:each="cemetery : ${cemeteries}" th:value="${id}" th:text="${name}">.</option>
+						  <option th:each="cemetery : ${cemeteries}" th:value="${cemetery.id}" th:text="${cemetery.name}">.</option>
 						</select>
 						<br />
 						<label for="fiveHundredClub">500 Club (War Casualty)</label>
