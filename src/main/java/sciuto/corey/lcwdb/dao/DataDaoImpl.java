@@ -48,12 +48,11 @@ public class DataDaoImpl implements DataDao {
 			+"c.cemetery_name,s.soldier_id,s.cemetery_lot,s.cemetery_book_page,"
 			+"s.date_of_death,r.rank_name,n.note,p.city_name,p.state_code,m.monument_type_name\n"
 			+"FROM soldier s\n"
-			+"LEFT JOIN (soldier_rank r) ON (s.rank_id=r.rank_id )\n"
-			+"LEFT JOIN (notes n) ON (s.note_id=n.note_id)\n"
-			+"LEFT JOIN (place p) ON (s.place_of_residence_id=p.place_id)\n"
-			+"LEFT JOIN (monument_type m) ON (s.monument_type_id=m.monument_type_id)\n"
-			+"JOIN cemetery c\n"
-			+"where c.cemetery_id = s.cemetery_id\n";
+			+"LEFT JOIN soldier_rank r ON (s.rank_id=r.rank_id )\n"
+			+"LEFT JOIN notes n ON (s.note_id=n.note_id)\n"
+			+"LEFT JOIN place p ON (s.place_of_residence_id=p.place_id)\n"
+			+"LEFT JOIN monument_type m ON (s.monument_type_id=m.monument_type_id)\n"
+			+"JOIN cemetery c ON (c.cemetery_id = s.cemetery_id)\n";
 	private ParameterizedRowMapper<SoldierResultRecord> bySoldierRowMapper = new ParameterizedRowMapper<SoldierResultRecord>() {
 		@Override
 		public SoldierResultRecord mapRow(ResultSet rs, int rowNum) throws SQLException {

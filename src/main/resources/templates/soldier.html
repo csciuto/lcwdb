@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="utf-8">
+	<meta charset="utf-8" />
 	<title>Lowell Civil War Database</title>
 
 	<link rel="stylesheet" href="lcwdb.css" type="text/css" />
@@ -15,11 +15,11 @@
 		<div th:replace="header :: header"></div>
 		
 		<div class="soldier">
-			<h1 class="soldierName" th:inline="text">[[${soldierRecord.rank}]] [[${soldierRecord.firstName}]] [[${soldierRecord.middleInitial}]] [[${soldierRecord.lastName}]] [[${soldierRecord.suffix}]]</h1>
+			<h1 class="soldierName" th:text="|${soldierRecord.rank} ${soldierRecord.firstName} ${soldierRecord.middleInitial} ${soldierRecord.lastName} ${soldierRecord.suffix}|">Name</h1>
 			
 			<div class="soldierBio">
-				<p th:if="${soldierRecord.residenceCity || soldierRecord.residenceState}" 
-					th:inline="text">Residence [[${soldierRecord.residenceCity}]] [[${soldierRecord.residenceState}]]</p>
+				<p th:if="${#strings.isEmpty(soldierRecord.residenceCity) or #strings.isEmpty(soldierRecord.residenceState)}" 
+					th:text="|Residence ${soldierRecord.residenceCity} ${soldierRecord.residenceState}|" />
 			</div>
 <!-- 
 			<div class="soldierService">

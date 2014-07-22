@@ -73,8 +73,8 @@
 				<div id="results">
 					<div id="resultsInfo" th:if="${queryByNameResults}">
 
-						<p th:if="${not queryByNameResults.truncated}" th:inline="text">Returned [[${#lists.size(queryByNameResults.results)}]] records</p>
-						<p th:if="${queryByNameResults.truncated}" th:inline="text" class="warn">Returned too many records. Displaying first [[${#lists.size(queryByNameResults.results)}]]. Please restrict your query.</p>
+						<p th:if="${not queryByNameResults.truncated}" th:text="|Returned ${#lists.size(queryByNameResults.results)} records|" />
+						<p th:if="${queryByNameResults.truncated}" th:text="|Returned too many records. Displaying first ${#lists.size(queryByNameResults.results)}. Please restrict your query.|" class="warn" />
 					
 						<table id="resultsTable">
 							<tr>
