@@ -56,6 +56,10 @@ public class DataDaoImpl implements DataDao {
 	private ParameterizedRowMapper<SoldierResultRecord> bySoldierRowMapper = new ParameterizedRowMapper<SoldierResultRecord>() {
 		@Override
 		public SoldierResultRecord mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			// Most fields are set to the empty string if there is no value, but the query will not
+			// convert null to empty string on joins. Need to manually map '' in these cases (e.g. rank).
+			
 			SoldierResultRecord s = new SoldierResultRecord();
 			s.setFirstName(rs.getString(1));
 			s.setLastName(rs.getString(2));
@@ -69,9 +73,9 @@ public class DataDaoImpl implements DataDao {
 			s.setDateOfDeath(rs.getDate(10));
 			s.setRank( rs.getString(11) == null ? "" : rs.getString(11) );
 			s.setNotes(rs.getString(12));
-			s.setResidenceCity(rs.getString(13));
-			s.setResidenceState(rs.getString(14));
-			s.setMonumentType(rs.getString(15));
+			s.setResidenceCity( rs.getString(13) == null ? "" : rs.getString(13) );
+			s.setResidenceState( rs.getString(14) == null ? "" : rs.getString(14) );
+			s.setMonumentType( rs.getString(15) == null ? "" : rs.getString(15) );
 			return s;
 		}
 	};

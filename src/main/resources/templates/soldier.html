@@ -21,6 +21,7 @@
 				<p th:if="${#strings.isEmpty(soldierRecord.residenceCity) or #strings.isEmpty(soldierRecord.residenceState)}" 
 					th:text="|Residence ${soldierRecord.residenceCity} ${soldierRecord.residenceState}|" />
 			</div>
+
 <!-- 
 			<div class="soldierService">
 				<c:if test="${soldierRecord.units != null && not empty soldierRecord.units}">
@@ -40,21 +41,22 @@
 					</div>
 				</c:if>
 			</div>
+-->
 
 			<div class="soldierBurialInfo">
-				<p>Date of Death <c:if test="${soldierRecord.dateOfDeath != null}">${soldierRecord.dateOfDeath}</c:if><c:if test="${soldierRecord.dateOfDeath == null}">Unknown Date</c:if></p>
-				<c:if test="${soldierRecord.killedInAction == true}"><p>500 Club</p></c:if>
-				<p>Buried in ${soldierRecord.cemeteryName} ${soldierRecord.cemeteryLot}</p>
-				<c:if test="${soldierRecord.monumentType != null}"><p>Monument ${soldierRecord.monumentType}</p></c:if>
+				<p>Date of Death <span th:text="${soldierRecord.dateOfDeath}?: 'Unknown Date'"></span></p>
+				<p th:if="${soldierRecord.killedInAction}">500 Club</p>
+				<p th:text="|Buried in ${soldierRecord.cemeteryName} ${soldierRecord.cemeteryLot}|" />
+				<p th:test="${soldierRecord.monumentType}" th:text="|Monument ${soldierRecord.monumentType}|"/>
 			</div>
-			
+				
 			<div class="soldierNotes">
 				<p>Additional Notes:</p>
 				<div class="soldierMultilineResultData">
-					<p>${soldierRecord.notes}</p>
+					<p th:text="${soldierRecord.notes}" />
 				</div>			
 			</div>
- -->			
+ 		
 			<a href="./" onClick="history.back()">Go back</a>
 		</div>
 	
