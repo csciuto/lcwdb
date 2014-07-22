@@ -1,65 +1,63 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="utf-8" />
-	<title>Lowell Civil War Database</title>
+<meta charset="utf-8" />
+<title>Lowell Civil War Database</title>
 
-	<link rel="stylesheet" href="lcwdb.css" type="text/css" />
-	<link rel="stylesheet" href="css/custom-theme/jquery-ui-1.10.3.custom.css" />
-	<script src="js/jquery-1.9.1.js"></script>
-	<script src="js/jquery-ui-1.10.3.custom.js"></script>
-	
+<link rel="stylesheet" href="lcwdb.css" type="text/css" />
+<link rel="stylesheet"
+	href="css/custom-theme/jquery-ui-1.10.3.custom.css" />
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/jquery-ui-1.10.3.custom.js"></script>
+
 </head>
 <body>
 	<div id="mainBody">
 		<div th:replace="header :: header"></div>
-		
+
 		<div class="soldier">
-			<h1 class="soldierName" th:text="|${soldierRecord.rank} ${soldierRecord.firstName} ${soldierRecord.middleInitial} ${soldierRecord.lastName} ${soldierRecord.suffix}|">Name</h1>
-			
+			<h1 class="soldierName"
+				th:text="|${soldierRecord.rank} ${soldierRecord.firstName} ${soldierRecord.middleInitial} ${soldierRecord.lastName} ${soldierRecord.suffix}|">Name</h1>
+
 			<div class="soldierBio">
-				<p th:if="${#strings.isEmpty(soldierRecord.residenceCity) or #strings.isEmpty(soldierRecord.residenceState)}" 
+				<p th:if="${#strings.isEmpty(soldierRecord.residenceCity) or #strings.isEmpty(soldierRecord.residenceState)}"
 					th:text="|Residence ${soldierRecord.residenceCity} ${soldierRecord.residenceState}|" />
 			</div>
 
-<!-- 
 			<div class="soldierService">
-				<c:if test="${soldierRecord.units != null && not empty soldierRecord.units}">
+				<div th:if="${not #lists.isEmpty(soldierRecord.units)}">
 					<p>Units served in:</p>
-					<div class="soldierMultilineResultData">
-						<c:forEach var="unit" items="${soldierRecord.units}">
-							<p>${unit.regiment} ${unit.company}</p>
-						</c:forEach>
+					<div class="soldierMultilineResultData" th:each="unit : ${soldierRecord.units}">
+						<p th:text="|${unit.regiment} ${unit.company}|" />
 					</div>
-				</c:if>
-				<c:if test="${soldierRecord.ships != null && not empty soldierRecord.ships}">
+				</div>
+				<div th:if="${not #lists.isEmpty(soldierRecord.ships)}">
 					<p>Ships served on:</p>
-					<div class="soldierMultilineResultData">
-						<c:forEach var="ship" items="${soldierRecord.ships}">
-							<p>${ship.ship}</p>
-						</c:forEach>
+					<div class="soldierMultilineResultData" th:each="ship : ${soldierRecord.ships}">
+						<p th:text="|${ship.ship}|" />
 					</div>
-				</c:if>
-			</div>
--->
+				</div>
 
-			<div class="soldierBurialInfo">
-				<p>Date of Death <span th:text="${soldierRecord.dateOfDeath}?: 'Unknown Date'"></span></p>
-				<p th:if="${soldierRecord.killedInAction}">500 Club</p>
-				<p th:text="|Buried in ${soldierRecord.cemeteryName} ${soldierRecord.cemeteryLot}|" />
-				<p th:test="${soldierRecord.monumentType}" th:text="|Monument ${soldierRecord.monumentType}|"/>
+				<div class="soldierBurialInfo">
+					<p>Date of Death <span th:text="${soldierRecord.dateOfDeath}?: 'Unknown Date'"></span></p>
+					<p th:if="${soldierRecord.killedInAction}">500 Club</p>
+					<p th:text="|Buried in ${soldierRecord.cemeteryName} ${soldierRecord.cemeteryLot}|" />
+					<p th:test="${soldierRecord.monumentType}" th:text="|Monument ${soldierRecord.monumentType}|" />
+				</div>
+
+				<div class="soldierNotes">
+					<p>Additional Notes:</p>
+					<div class="soldierMultilineResultData">
+						<p th:text="${soldierRecord.notes}" />
+					</div>
+				</div>
+
+				<a href="./" onClick="history.back()">Go back</a>
 			</div>
-				
-			<div class="soldierNotes">
-				<p>Additional Notes:</p>
-				<div class="soldierMultilineResultData">
-					<p th:text="${soldierRecord.notes}" />
-				</div>			
-			</div>
- 		
-			<a href="./" onClick="history.back()">Go back</a>
+
 		</div>
-	
+		
 		<div th:replace="footer :: footer"></div>
 
 	</div>
