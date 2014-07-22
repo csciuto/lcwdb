@@ -67,7 +67,7 @@ public class DataDaoImpl implements DataDao {
 			s.setCemeteryLot(rs.getString(8));
 			s.setCemeteryBookPage(rs.getInt(9));
 			s.setDateOfDeath(rs.getDate(10));
-			s.setRank(rs.getString(11));
+			s.setRank( rs.getString(11) == null ? "" : rs.getString(11) );
 			s.setNotes(rs.getString(12));
 			s.setResidenceCity(rs.getString(13));
 			s.setResidenceState(rs.getString(14));
