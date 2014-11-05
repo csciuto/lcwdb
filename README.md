@@ -4,7 +4,7 @@ This was an (aborted but functional) database application containing veterans
 from Lowell, Massachusetts.
 
 It is built in Java and was an opportunity for me to play with Spring Boot
-<http://projects.spring.io/spring-boot/>, Thymeleaf <http://www.thymeleaf.org/>,
+&lt;http://projects.spring.io/spring-boot/&gt;, Thymeleaf &lt;http://www.thymeleaf.org/&gt;,
 and Heroku (which means the database is PostgreSQL)
 
 Running
@@ -15,7 +15,7 @@ Running
     had this running on MySQL as well.
 3.  Set the DATABASE_URL environment variable. This was required for Heroku, so
     it's the method I used as well. The format is:
-    postgres://<user>:-i<pass>@<server>:<port>/<di5r0tqii67n9>schema>
+    postgres://&lt;user&gt;:-i&lt;pass&gt;@&lt;server&gt;:&lt;port&gt;/&lt;schema&gt;
 3a. If the database connection requires SSL, set the value in    
     src/main/resources/application.properties to dev.
 3b. If this database setup doesn't work, the database configurations are in
